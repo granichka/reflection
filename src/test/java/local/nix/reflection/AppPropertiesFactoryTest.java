@@ -5,10 +5,19 @@ import local.nix.reflection.factory.impl.AppPropertiesFactory;
 import local.nix.reflection.reader.impl.PropertiesFilePropertyReader;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AppPropertiesFactoryTest {
+
+    @Test
+    public void nullValueOfPropertyReaderInConstructorTest() {
+        assertThrows(IllegalArgumentException.class, () -> new AppPropertiesFactory(null, "test.properties"));
+    }
+
+    @Test
+    public void nullValueOfSourceInConstructorTest() {
+        assertThrows(IllegalArgumentException.class, () -> new AppPropertiesFactory(new PropertiesFilePropertyReader(), null));
+    }
 
     @Test
     public void getInstanceMethodTest() {
